@@ -16,12 +16,20 @@
        <form method="POST" action="{{route('connect')}}"> 
         @csrf
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">smtp</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
+      <label for="exampleInputEmail1" class="form-label">email sender</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="sender" aria-describedby="emailHelp">
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Password</label>
       <input type="password" class="form-control" name="passwd" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail2" class="form-label">email reciever</label>
+      <input type="text" class="form-control" id="exampleInputEmail2" name="reciever" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail2" class="form-label">email reciever</label>
+      <textarea class="form-control" id="exampletextEmail" name="bodyEmail" cols="50" rows="10"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>  

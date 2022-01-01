@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\inf_SMTPs;
 use Illuminate\Http\Request;
+use Config;
+use Mail;
 
 class InfSMTPsController extends Controller
 {
@@ -12,11 +14,44 @@ class InfSMTPsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        setEnv('ADMIN_APP','BADR');
-        $data=env('ADMIN_APP');
-         return back()->withErrors(['msg' => env('ADMIN_APP')]); 
+        // Config::set('mail.port', 55);
+        $path='mail.mailers.smtp';
+        $configSmtp=[
+            'host' => 'sss',
+            'port' => '',
+            'encryption' => 'tls',
+            'username' => '',
+            'password' => ''
+        ];
+        $configSmtp['host']='smtp.mailtrap.io';
+        $configSmtp['port']=2525;
+        $configSmtp['username']=$request->sender;
+        $configSmtp['password']=$request->passwd;
+
+
+       
+        Config::set(
+            [
+                $path.'.host'=> $configSmtp['host'],
+                $path.'.port'=> $configSmtp['port'],
+                $path.'.username'=> '801177a509e30b',
+                $path.'.password'=> '122ca0395d8581'
+    
+            ]);
+
+        $data = $request->sender;
+      $body=$request->bodyEmail;
+        
+
+        Mail::send([], [
+            'emailS'=> $request->sender
+        ], function ($message) use ($data,$body) {
+            $message->from($data, 'Laravel');
+            $message->to($data)->subject('this is the test')
+            ->setBody($body, 'text/html');
+                });
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-
+$var="good";
 return [
 
     /*
@@ -14,7 +14,7 @@ return [
     */
 
     'default' => env('MAIL_MAILER', 'smtp'),
-
+    'admineapp' => env('ADMINE_APP', $var),
     /*
     |--------------------------------------------------------------------------
     | Mailer Configurations
